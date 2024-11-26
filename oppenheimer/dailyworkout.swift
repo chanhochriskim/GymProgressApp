@@ -24,8 +24,8 @@ struct dailyworkoutview: View {
                 Text("Select Date")
                     .font(.title2)
                     .frame(width: UIScreen.main.bounds.width / 3)
-                        .background(Color.blue)
-                        .foregroundColor(.white)
+                        .background(Color.yellow)
+                        .foregroundColor(.black)
                         .cornerRadius(10)
             Button(action: {
                 showDatePicker.toggle()
