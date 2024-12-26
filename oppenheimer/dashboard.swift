@@ -9,6 +9,7 @@ import SwiftUI
 
 struct DashboardView: View {
     var workoutRecords: [WorkoutRecord]
+    @EnvironmentObject var workoutData: WorkoutData // access shared data
     
     var body: some View {
         VStack {
@@ -46,14 +47,17 @@ struct DashboardView: View {
     
 }
 
-// Add a sample preview
 struct DashboardView_Previews: PreviewProvider {
     static var previews: some View {
-        let sampleRecords = [
-            WorkoutRecord(date: Date(), split: "1", startTime: Date(), endTime: Date(), rating: "Good", notes: "Great session!"),
-            WorkoutRecord(date: Date(), split: "2", startTime: Date(), endTime: Date(), rating: "Phenomenal", notes: "Felt strong today!"),
-            WorkoutRecord(date: Date(), split: "3", startTime: Date(), endTime: Date(), rating: "Good", notes: "Great session!")
+        let workoutData = WorkoutData()
+        
+        // Add sample data
+        workoutData.workoutRecords = [
+            WorkoutRecord(date: Date(), split: "Chest", startTime: Date(), endTime: Date(), rating: "Good", notes: "Solid session"),
+            WorkoutRecord(date: Date(), split: "Legs", startTime: Date(), endTime: Date(), rating: "Phenomenal", notes: "Felt strong!")
         ]
-        DashboardView(workoutRecords: sampleRecords)
+        
+        return DashboardView(workoutRecords: workoutData.workoutRecords)
+            .environmentObject(workoutData) // Inject the environment object
     }
 }

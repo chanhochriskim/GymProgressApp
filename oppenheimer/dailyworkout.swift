@@ -31,8 +31,8 @@ struct DailyWorkoutView: View {
     @State private var selectedRating: String = "Rating Option" // ratings option
     @State private var notes: String = "" // notes input
     
-    // List of workout Records
-    @State private var workoutRecords: [WorkoutRecord] = []
+    // New state for alert
+    @State private var showConfirmationAlert = false
     
     var body: some View {
         VStack(spacing: 20) {
@@ -221,6 +221,9 @@ struct DailyWorkoutView: View {
                     .foregroundColor(.black)
                     .cornerRadius(10)
             }
+            .alert("Workout Submitted!", isPresented: $showConfirmationAlert) {
+                Button("OK", role: .cancel) {}
+            }
             
             Spacer() // contents to be on the top
         }
@@ -238,7 +241,7 @@ struct DailyWorkoutView: View {
             notes: notes
         )
         workoutData.workoutRecords.append(newRecord) // save to shared data
-        print("Workout Saved: \(newRecord)")
+        showConfirmationAlert = true
     }
     
     
@@ -250,7 +253,7 @@ struct DailyWorkoutView: View {
     }
 }
 
-
 #Preview {
     DailyWorkoutView()
+        .environmentObject(WorkoutData()) // Inject the environment object
 }

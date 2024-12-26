@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var workoutData = WorkoutData() // shared data model
+    @StateObject private var workoutData = WorkoutData() // shared data model
     
     var body: some View {
         NavigationView {
