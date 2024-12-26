@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject var workoutData = WorkoutData() // shared data model
+    
     var body: some View {
         NavigationView {
             
@@ -23,7 +25,7 @@ struct ContentView: View {
                         .font(.system(size: 27, weight: .bold, design: .serif)) // customize font-style
                         .padding()
                         .frame(maxWidth: .infinity)
-    
+
                     Spacer() // pushing content to the left
                 }
                 .padding()
@@ -35,7 +37,7 @@ struct ContentView: View {
                 VStack(spacing: 20) {
                     
                     // Button for dailyworkout (2-1)
-                    NavigationLink(destination: dailyworkoutview()) {
+                    NavigationLink(destination: DailyWorkoutView().environmentObject(workoutData)) {
                         Text("Daily Workout")
                             .font(.title2)
                             .padding()
@@ -47,7 +49,7 @@ struct ContentView: View {
                     .padding(.horizontal)
                     
                     // Button for dashboard (2-2)
-                    NavigationLink(destination: dashboardview()) {
+                    NavigationLink(destination: DashboardView(workoutRecords: workoutData.workoutRecords)) {
                         Text("Dashboard")
                             .font(.title2)
                             .padding()
@@ -66,6 +68,8 @@ struct ContentView: View {
     }
 }
 
-#Preview {
-    ContentView()
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
 }
