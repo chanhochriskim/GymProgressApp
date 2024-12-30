@@ -22,7 +22,7 @@ struct DashboardView: View {
                     Text("Date: \(formattedDate(record.date))")
                         .font(.headline)
                     Text("Split: \(record.split)")
-                    Text("Duration: \(formattedTime(record.startTime)) - \(formattedTime(record.endTime))")
+                    Text("Duration: \(record.duration)")
                     Text("Rating: \(record.rating)")
                     Text("Notes: \(record.notes)")
                 }
