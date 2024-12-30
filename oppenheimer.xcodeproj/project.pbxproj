@@ -29,9 +29,30 @@
 		F5AE8D302CF409C500B9979C /* oppenheimerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = oppenheimerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		F5ED81552D2245CD005B4FD3 /* Exceptions for "oppenheimer" folder in "oppenheimerTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				WorkoutModel.xcdatamodeld,
+			);
+			target = F5AE8D252CF409C500B9979C /* oppenheimerTests */;
+		};
+		F5ED81562D2245CD005B4FD3 /* Exceptions for "oppenheimer" folder in "oppenheimerUITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				WorkoutModel.xcdatamodeld,
+			);
+			target = F5AE8D2F2CF409C500B9979C /* oppenheimerUITests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		F5AE8D172CF409C400B9979C /* oppenheimer */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				F5ED81552D2245CD005B4FD3 /* Exceptions for "oppenheimer" folder in "oppenheimerTests" target */,
+				F5ED81562D2245CD005B4FD3 /* Exceptions for "oppenheimer" folder in "oppenheimerUITests" target */,
+			);
 			path = oppenheimer;
 			sourceTree = "<group>";
 		};
