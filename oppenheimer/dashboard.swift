@@ -10,50 +10,46 @@ import CoreData
 
 struct DashboardView: View {
     // WorkoutRecordEntity = coredata entity that stores workout logs.
-    // NSSortDescriptor = ensures workouts are displayed in descending order.
+    // NSSortDescriptor = ensures workouts are displayed in descending order
+   
     @FetchRequest( // fetchrequest is needed for retrieving saved workout records.
         entity: WorkoutRecordEntity.entity(),
         sortDescriptors: [NSSortDescriptor(keyPath: \WorkoutRecordEntity.date, ascending: false)]
     ) var workoutRecords: FetchedResults<WorkoutRecordEntity>
 
-    
-   
-    var workoutRecords: [WorkoutRecord]
+
     @EnvironmentObject var workoutData: WorkoutData // access shared data
     
     var body: some View {
-        
-        List {
-            ForEach(workoutRecords) { record in
-                VStack(alignment: .leading, spacing: 5) {
-                            Text("Date: \(formattedDate(record.date))")
-                                .font(.headline)
-                            Text("Split: \(record.split ?? "N/A")")
-                            Text("Duration: \(calculateDuration(startTime: record.startTime ?? Date(), endTime: record.endTime ?? Date()))")
-                            Text("Rating: \(record.rating ?? "N/A")")
-                            Text("Notes: \(record.notes ?? "N/A")")
-                        }
-                .padding()
-            }
-        }
-        .listStyle(PlainListStyle()) // adjusting list style
-        
+    
         VStack {
             Text("Dashboard")
                 .font(.largeTitle)
                 .padding()
-            
-            List(workoutRecords, id: \.id) { record in
-                VStack(alignment: .leading, spacing: 5) {
-                    Text("Date: \(formattedDate(record.date))")
-                        .font(.headline)
-                    Text("Split: \(record.split)")
-                    Text("Duration: \(record.duration)")
-                    Text("Rating: \(record.rating)")
-                    Text("Notes: \(record.notes)")
+    
+            List {
+                ForEach(workoutRecords) { record in
+                    VStack(alignment: .leading, spacing: 5) {
+                        if let date = record.date {
+                            Text("Date: \(formattedDate(date))")
+                                .font(.headline)
+                        } else {
+                            Text("Date: N/A")
+                                .font(.headline)
+                        }
+                                Text("Split: \(record.split)")
+                        if let startTime = record.startTime, let endTime = record.endTime {
+                                        Text("Duration: \(calculateDuration(startTime: startTime, endTime: endTime))")
+                                    } else {
+                                        Text("Duration: N/A")
+                                    }
+                                Text("Rating: \(record.rating)")
+                                Text("Notes: \(record.notes)")
+                            }
+                    .padding()
                 }
-                .padding()
             }
+            .listStyle(PlainListStyle()) // adjusting list style
         }
     }
     
@@ -79,23 +75,15 @@ struct DashboardView: View {
         return "\(hours) hr \(minutes)min"
     }
     
+    
+    
 }
-
-
 
 
 
 struct DashboardView_Previews: PreviewProvider {
     static var previews: some View {
-        let workoutData = WorkoutData()
-        
-        // Add sample data
-        workoutData.workoutRecords = [
-            WorkoutRecord(date: Date(), split: "Chest", startTime: Date(), endTime: Date(), rating: "Good", notes: "Solid session"),
-            WorkoutRecord(date: Date(), split: "Legs", startTime: Date(), endTime: Date(), rating: "Phenomenal", notes: "Felt strong!")
-        ]
-        
-        return DashboardView(workoutRecords: workoutData.workoutRecords)
-            .environmentObject(workoutData) // Inject the environment object
+        DashboardView()
+            .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
     }
 }
