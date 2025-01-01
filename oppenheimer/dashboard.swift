@@ -11,6 +11,9 @@ import CoreData
 struct DashboardView: View {
     // WorkoutRecordEntity = coredata entity that stores workout logs.
     // NSSortDescriptor = ensures workouts are displayed in descending order
+    
+    @Environment(\.managedObjectContext) private var viewContext // gives access to NSManagedObjectContext passed from the parent view (contentview).
+
    
     @FetchRequest( // fetchrequest is needed for retrieving saved workout records.
         entity: WorkoutRecordEntity.entity(),
@@ -45,6 +48,7 @@ struct DashboardView: View {
                             }
                     .padding()
                 }
+                .onDelete(perform: deleteWorkout)
             }
             .listStyle(PlainListStyle()) // adjusting list style
         }
@@ -63,6 +67,20 @@ struct DashboardView: View {
         let hours = Int(interval) / 3600
         let minutes = (Int(interval) % 3600) / 60
         return "\(hours) hr \(minutes)min"
+    }
+    
+    private func deleteWorkout(at offsets: IndexSet) {
+        for index in offsets {
+            let workout = workoutRecords[index] // get the workout to delete
+            viewContext.delete(workout) // deleting the workout from CoreData
+        }
+        
+        do {
+            try viewContext.save() // save changes to confirm deletion
+            print("workout properly deleted.")
+        } catch {
+            print("failed to delete workout.")
+        }
     }
     
     
