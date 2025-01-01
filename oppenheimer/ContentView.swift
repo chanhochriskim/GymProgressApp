@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject private var workoutData = WorkoutData() // shared data model
+    let persistenceController = PersistenceController.shared
+    
     
     var body: some View {
         NavigationView {

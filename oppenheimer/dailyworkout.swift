@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct WorkoutRecord: Identifiable {
     let id = UUID()
@@ -25,6 +26,8 @@ struct WorkoutRecord: Identifiable {
 }
 
 struct DailyWorkoutView: View {
+    @Environment(\.managedObjectContext) private var viewContext
+
     @EnvironmentObject var workoutData: WorkoutData // access shared data
     
     @State private var selectedDate = Date() // storing the selectedDate
@@ -264,6 +267,14 @@ struct DailyWorkoutView: View {
             rating: selectedRating,
             notes: notes
         )
+        do {
+                try viewContext.save()
+                showConfirmationAlert = true
+                print("Workout saved successfully.")
+            } catch {
+                // Handle the Core Data error appropriately
+                print("Failed to save workout")
+            }
         workoutData.workoutRecords.append(newRecord) // save to shared data
         showConfirmationAlert = true
     }
