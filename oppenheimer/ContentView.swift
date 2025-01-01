@@ -39,7 +39,8 @@ struct ContentView: View {
                 VStack(spacing: 20) {
                     
                     // Button for dailyworkout (2-1)
-                    NavigationLink(destination: DailyWorkoutView().environmentObject(workoutData)) {
+                    NavigationLink(destination: DailyWorkoutView()
+                        .environment(\.managedObjectContext, persistenceController.container.viewContext)) {
                         Text("Daily Workout")
                             .font(.title2)
                             .padding()
@@ -51,7 +52,8 @@ struct ContentView: View {
                     .padding(.horizontal)
                     
                     // Button for dashboard (2-2)
-                    NavigationLink(destination: DashboardView(workoutRecords: workoutData.workoutRecords)) {
+                    NavigationLink(destination: DashboardView()
+                        .environment(\.managedObjectContext, persistenceController.container.viewContext)) {
                         Text("Dashboard")
                             .font(.title2)
                             .padding()

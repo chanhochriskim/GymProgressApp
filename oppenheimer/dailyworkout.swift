@@ -27,8 +27,6 @@ struct WorkoutRecord: Identifiable {
 
 struct DailyWorkoutView: View {
     @Environment(\.managedObjectContext) private var viewContext
-
-    @EnvironmentObject var workoutData: WorkoutData // access shared data
     
     @State private var selectedDate = Date() // storing the selectedDate
     @State private var showDatePicker = false // visibility of the calender
@@ -259,24 +257,24 @@ struct DailyWorkoutView: View {
     
     // saving workout records
     private func saveWorkout() {
-        let newRecord = WorkoutRecord(
-            date: selectedDate,
-            split: selectedWorkout,
-            startTime: startTime,
-            endTime: endTime,
-            rating: selectedRating,
-            notes: notes
-        )
+        // Create a new WorkoutRecordEntity instance
+        let newRecord = WorkoutRecordEntity(context: viewContext)
+        newRecord.date = selectedDate
+        newRecord.split = selectedWorkout
+        newRecord.startTime = startTime
+        newRecord.endTime = endTime
+        newRecord.rating = selectedRating
+        newRecord.notes = notes
+        
         do {
-                try viewContext.save()
-                showConfirmationAlert = true
-                print("Workout saved successfully.")
-            } catch {
-                // Handle the Core Data error appropriately
-                print("Failed to save workout")
-            }
-        workoutData.workoutRecords.append(newRecord) // save to shared data
-        showConfirmationAlert = true
+            // Save the new entity into Core Data
+            try viewContext.save()
+            showConfirmationAlert = true // Show success alert
+            print("Workout saved successfully.")
+        } catch {
+            // Handle save failure
+            print("Failed to save workout: \(error.localizedDescription)")
+        }
     }
     
     

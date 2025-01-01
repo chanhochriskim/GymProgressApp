@@ -16,9 +16,6 @@ struct DashboardView: View {
         entity: WorkoutRecordEntity.entity(),
         sortDescriptors: [NSSortDescriptor(keyPath: \WorkoutRecordEntity.date, ascending: false)]
     ) var workoutRecords: FetchedResults<WorkoutRecordEntity>
-
-
-    @EnvironmentObject var workoutData: WorkoutData // access shared data
     
     var body: some View {
     
@@ -58,13 +55,6 @@ struct DashboardView: View {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
         return formatter.string(from: date)
-    }
-    
-    // time formatting helper
-    private func formattedTime(_ time: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.timeStyle = .short
-        return formatter.string(from: time)
     }
     
     // duration calculator (helper)
