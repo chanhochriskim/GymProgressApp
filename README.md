@@ -8,6 +8,8 @@ Check out the program demo on YouTube by clicking the thumbnail below:
 
 [![Watch the demo on YouTube](https://img.youtube.com/vi/X7qQLzsG8UI/0.jpg)](https://www.youtube.com/watch?v=X7qQLzsG8UI)
 
+
+
 ## Features
 
 - **Daily Workout Logging:**
