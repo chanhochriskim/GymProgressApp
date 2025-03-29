@@ -22,7 +22,7 @@ Check out the program demo on YouTube by clicking the thumbnail below:
 
 - **Swift**: Primary programming language for iOS development.
 - **SwiftUI**: Framework for building the app's user interface.
-- **Core Data**: Framework for data persistence.
+- **Core Data**: Framework for local database usage.
 
 ## Conclusion
 This project has limitations due to the free provisioning profile, which requires re-deployment every 7 days as it is not registered in an Apple Developer membership. Despite this, the entire process of coming up with the idea and learning new technologies like Swift was challenging yet very much rewarding. I gained valuable technical knowledge, which has motivated me to explore other opportunities, and I look forward to creating even cooler things in the future.
