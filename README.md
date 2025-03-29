@@ -1,6 +1,6 @@
 # Oppenheimer Project 🏋️.
 
-The **Oppenheimer** is a personal iOS application project designed to simplify and enhance workout journaling. This app allows users to log, track, edit, and delete their workout sessions while maintaining record data using Core Data. Built with SwiftUI, this app features a clean and intuitive user interface, making it an ideal tool for those who track down their gym progress like myself.
+The **Oppenheimer** is a personal iOS application project designed to simplify and enhance workout journaling. This app allows users to log, track, edit, and delete their workout sessions while maintaining record data using Core Data. Built with SwiftUI, this app features a clean and intuitive user interface, making it an ideal tool for those who track down their gym progress like myself!
 
 ## Project Demo
 
